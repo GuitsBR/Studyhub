@@ -1,0 +1,42 @@
+name: Bug Report
+description: Informe um comportamento inesperado ou um problema.
+title: "[BUG] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por nos ajudar a melhorar o studyhub!  Descreva o
+        problema com o máximo de detalhes possível para que possamos
+        reproduzi‑lo e corrigi‑lo.
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição do bug
+      description: O que aconteceu?  O que você esperava que acontecesse?
+      placeholder: Descreva aqui o comportamento inesperado
+      value: ""
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+      description: Forneça uma sequência de passos para reproduzir o problema.
+      placeholder: |
+        1. Vá para '...'
+        2. Clique em '....'
+        3. Role até '....'
+        4. Veja o erro
+      value: ""
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Sistema operacional, navegador e versão do aplicativo
+      placeholder: e.g., Windows 11 + Chrome 114 + studyhub 0.1.0
+      value: ""
+    validations:
+      required: false

@@ -1,0 +1,44 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
+      - name: Install dependencies and build backend
+        working-directory: backend
+        run: |
+          npm ci
+          npm run build --if-present
+
+      # Example deployment step using Render deploy hook
+      # Set RENDER_DEPLOY_HOOK in repository secrets to the
+      # deploy hook URL provided by Render.  This triggers a new
+      # deployment after each push to main.
+      - name: Trigger Render deploy
+        if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
+        run: |
+          curl -X POST "$RENDER_DEPLOY_HOOK"
+
+      # Example deployment step using Heroku CLI.  Requires
+      # HEROKU_API_KEY and HEROKU_APP_NAME secrets.
+      - name: Deploy to Heroku
+        if: ${{ secrets.HEROKU_API_KEY != '' && secrets.HEROKU_APP_NAME != '' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          working_directory: backend

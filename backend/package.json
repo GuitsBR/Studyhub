@@ -1,0 +1,28 @@
+{
+  "name": "studyhub-backend",
+  "version": "0.1.0",
+  "description": "Backend API for studyhub",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "migrate": "node src/migrations/run.js",
+    "seed": "node src/seed/index.js",
+    "lint": "eslint . --ext .js"
+  },
+  "keywords": ["studyhub", "express", "api"],
+  "author": "StudyHub Team",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^8.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.48.0",
+    "nodemon": "^3.0.1"
+  }
+}
